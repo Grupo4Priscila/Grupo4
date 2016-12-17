@@ -12,6 +12,7 @@ namespace Publicaciones.Models{
         ///autorCorrespondiente: Autor correspondiente del articulo
         ///autorPrincipal: Autor principal del articulo
         ///cantidadRechazos: cantidad de rechazos que tiene el paper
+        ///EstadoDePostulacion: lista de todos los estados de las postulaciones del paper
     ///<summary>
     ///<returns></returns>
     public class Paper{
@@ -23,8 +24,11 @@ namespace Publicaciones.Models{
         public string Abstract{set;get;}
         public Autor autorCorrespondiente{set;get;}
         public Autor autorPrincipal{set;get;}
-        public List<int> listaAutor;
+        public List<Autor> listaAutor;
         public int cantidadRechazos{set;get;}
+        public List<EstadoDePostulacion> EstadoDePostulacion;
+
+
 
     }
 }
