@@ -17,12 +17,17 @@ namespace Publicaciones.Service {
 
         List <Persona> Personas();
 
+        void AddPublicaciones(Publicacion publicacion);
+        List <Publicacion> Publicaciones(string rut);
+
         void Initialize(); 
     }
 
     /// <summary>
     /// Implementacion de la interface IMainService
     /// </summary>
+
+
     public class MainService:IMainService {
 
         /// <summary>
@@ -44,7 +49,7 @@ namespace Publicaciones.Service {
         /// </summary>
         /// <param name="backendContext"></param>
         /// <param name="loggerFactory"></param>
-        public MainService(BackendContext backendContext, ILoggerFactory loggerFactory) {
+         public MainService(BackendContext backendContext, ILoggerFactory loggerFactory) {
 
             // Inicializacion del Logger
             Logger = loggerFactory?.CreateLogger < MainService > (); 
@@ -72,6 +77,13 @@ namespace Publicaciones.Service {
             // Guardo los cambios
             BackendContext.SaveChanges(); 
         }
+        public void AddPublicaciones(Publicacion publicacion){
+            // Guardo la Publicacion en el Backend
+            BackendContext.Publicacion.Add(publicacion); 
+
+            // Guardo los cambios
+            BackendContext.SaveChanges();
+        }
 
         public List < Persona > FindPersonas(string nombre) {
             return BackendContext.Personas
@@ -83,6 +95,18 @@ namespace Publicaciones.Service {
         public List<Persona> Personas() {
             return BackendContext.Personas.ToList();
         }
+    ///AQUIIIIIIIIIIIIIII HACERRRR ALGOO
+    ///
+    ///
+    ///
+    ///
+    ///
+    ///
+         public List<Publicacion> Publicaciones(string rut){
+             return null;
+         //    return BackendContext.Publicacion
+         //    Where()
+         }
 
         public void Initialize() {
 

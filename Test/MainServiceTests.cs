@@ -42,6 +42,7 @@ namespace Publicaciones.Service {
             // Servicio a probar
             Service = new MainService(backend, loggerFactory);
 
+
             Logger.LogInformation("Initialize Test ok.");
         }
 
