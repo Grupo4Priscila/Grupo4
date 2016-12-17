@@ -11,6 +11,7 @@ namespace Publicaciones.Service {
     /// Metodos de la interface
     /// </summary>
     public interface IMainService {
+
         void Add(Persona persona); 
         List < Persona > FindPersonas(string nombre);
         List <Persona> Personas();
@@ -19,17 +20,17 @@ namespace Publicaciones.Service {
         List <Publicacion> Publicaciones(string rut);
         List <Publicacion> Publicaciones();
 
-        void addAutor(Autor autor);
-  //      List<Autor> autores(String rut);
-        List<Autor> autores();
+        void AddAutor(Autor autor);
+        List<Autor> Autores(String rut);
+        List<Autor> Autores();
 
-        void addEstadoPostulacion(EstadoDePostulacion estadoPostulacion);
- //       List<EstadoDePostulacion> estadoPostulaciones(String tipo);
-        List<EstadoDePostulacion> estadoPostulaciones();
+        void AddEstadoPostulacion(EstadoDePostulacion estadoPostulacion);
+        List<EstadoDePostulacion> EstadoPostulaciones(String tipo);
+        List<EstadoDePostulacion> EstadoPostulaciones();
 
-        void addPaper(Paper paper);
- //       List<Paper> papers(String titulo);
-        List<Paper> papers();
+        void AddPaper(Paper paper);
+        List<Paper> Papers(String titulo);
+        List<Paper> Papers();
 
 
 
@@ -98,21 +99,21 @@ namespace Publicaciones.Service {
             // Guardo los cambios
             BackendContext.SaveChanges();
         }
-        public void addAutor(Autor autor){
+        public void AddAutor(Autor autor){
             // Guardo el Autor en el Backend
             BackendContext.Autores.Add(autor); 
 
             // Guardo los cambios
             BackendContext.SaveChanges(); 
         }
-        public void addPaper(Paper paper){
+        public void AddPaper(Paper paper){
             // Guardo el paper en el Backend
             BackendContext.Papers.Add(paper); 
 
             // Guardo los cambios
             BackendContext.SaveChanges(); 
         }
-        public void addEstadoPostulacion(EstadoDePostulacion estadoPostulacion){
+        public void AddEstadoPostulacion(EstadoDePostulacion estadoPostulacion){
             // Guardo el paper en el Backend
             BackendContext.EstadosdePostulaciones.Add(estadoPostulacion); 
 
@@ -130,10 +131,10 @@ namespace Publicaciones.Service {
         public List<Autor> Autores(){
             return BackendContext.Autores.ToList();
         }
-        public List<Paper> papers(){
+        public List<Paper> Papers(){
             return BackendContext.Papers.ToList(); 
         }
-        public List<EstadoDePostulacion> estadoPostulaciones(){
+        public List<EstadoDePostulacion> EstadoPostulaciones(){
             return BackendContext.EstadosdePostulaciones.ToList();
         }
 
@@ -149,8 +150,15 @@ namespace Publicaciones.Service {
          //    return BackendContext.Publicacion
          //    Where()
          }
-
-
+         public List<Autor> Autores(string rut){
+             return null;
+         }
+         public List<Paper> Papers(String titulo){
+             return null;
+         }
+        public List<EstadoDePostulacion> EstadoPostulaciones(String tipo){
+            return null;
+        }
 
 
 
