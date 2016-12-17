@@ -26,9 +26,30 @@ namespace Publicaciones.Backend {
         /// </summary>
         /// <returns>Link a la BD de Personas</returns>
         public DbSet < Persona > Personas {get; set; }
-
-        public DbSet <Publicacion> Publicacion{get;set;}
-
+       
+        /// <summary>
+        /// Representacion de las Publicaciones del Backend
+        /// </summary>
+        /// <returns>Link a la BD de Publicaciones</returns>
+        public DbSet <Publicacion> Publicaciones{get;set;}
+       
+        /// <summary>
+        /// Representacion del Paper del Backend
+        /// </summary>
+        /// <returns>Link a la BD de Papers</returns>
+        public DbSet <Paper> Papers{get;set;}
+       
+        /// <summary>
+        /// Representacion del Estado de la publicacion del Backend
+        /// </summary>
+        /// <returns>Link a la BD de EstadosdePostulaciones</returns>
+        public DbSet <EstadoDePostulacion> EstadosdePostulaciones{get;set;}
+       
+        /// <summary>
+        /// Representacion del Autor del Backend
+        /// </summary>
+        /// <returns>Link a la BD de Autores</returns>
+        public DbSet <Autor> Autores{get;set;}
     }
 
 }

@@ -12,13 +12,27 @@ namespace Publicaciones.Service {
     /// </summary>
     public interface IMainService {
         void Add(Persona persona); 
-
         List < Persona > FindPersonas(string nombre);
-
         List <Persona> Personas();
 
         void AddPublicaciones(Publicacion publicacion);
         List <Publicacion> Publicaciones(string rut);
+        List <Publicacion> Publicaciones();
+
+        void addAutor(Autor autor);
+  //      List<Autor> autores(String rut);
+        List<Autor> autores();
+
+        void addEstadoPostulacion(EstadoDePostulacion estadoPostulacion);
+ //       List<EstadoDePostulacion> estadoPostulaciones(String tipo);
+        List<EstadoDePostulacion> estadoPostulaciones();
+
+        void addPaper(Paper paper);
+ //       List<Paper> papers(String titulo);
+        List<Paper> papers();
+
+
+
 
         void Initialize(); 
     }
@@ -79,11 +93,50 @@ namespace Publicaciones.Service {
         }
         public void AddPublicaciones(Publicacion publicacion){
             // Guardo la Publicacion en el Backend
-            BackendContext.Publicacion.Add(publicacion); 
+            BackendContext.Publicaciones.Add(publicacion); 
 
             // Guardo los cambios
             BackendContext.SaveChanges();
         }
+        public void addAutor(Autor autor){
+            // Guardo el Autor en el Backend
+            BackendContext.Autores.Add(autor); 
+
+            // Guardo los cambios
+            BackendContext.SaveChanges(); 
+        }
+        public void addPaper(Paper paper){
+            // Guardo el paper en el Backend
+            BackendContext.Papers.Add(paper); 
+
+            // Guardo los cambios
+            BackendContext.SaveChanges(); 
+        }
+        public void addEstadoPostulacion(EstadoDePostulacion estadoPostulacion){
+            // Guardo el paper en el Backend
+            BackendContext.EstadosdePostulaciones.Add(estadoPostulacion); 
+
+            // Guardo los cambios
+            BackendContext.SaveChanges(); 
+        }
+       
+        public List<Persona> Personas() {
+            return BackendContext.Personas.ToList();
+        }
+
+        public List <Publicacion> Publicaciones(){
+            return BackendContext.Publicaciones.ToList();
+        }
+        public List<Autor> Autores(){
+            return BackendContext.Autores.ToList();
+        }
+        public List<Paper> papers(){
+            return BackendContext.Papers.ToList(); 
+        }
+        public List<EstadoDePostulacion> estadoPostulaciones(){
+            return BackendContext.EstadosdePostulaciones.ToList();
+        }
+
 
         public List < Persona > FindPersonas(string nombre) {
             return BackendContext.Personas
@@ -91,22 +144,22 @@ namespace Publicaciones.Service {
                 .OrderBy(p => p.Nombre)
                 .ToList(); 
         }
-
-        public List<Persona> Personas() {
-            return BackendContext.Personas.ToList();
-        }
-    ///AQUIIIIIIIIIIIIIII HACERRRR ALGOO
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
          public List<Publicacion> Publicaciones(string rut){
              return null;
          //    return BackendContext.Publicacion
          //    Where()
          }
+
+
+
+
+
+
+
+
+
+
+
 
         public void Initialize() {
 
