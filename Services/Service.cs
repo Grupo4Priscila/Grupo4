@@ -21,6 +21,7 @@ namespace Publicaciones.Service {
         List<Publicacion> Publicaciones();
         List<Autor> Autores();
         List<Paper> Papers();
+        void AddEstadoDePostulaciones(EstadoDePostulacion estado);
         List<EstadoDePostulacion> EstadoDePostulaciones();
 
         void Initialize(); 
@@ -91,6 +92,17 @@ namespace Publicaciones.Service {
         public void AddPublicaciones(Publicacion publicacion){
             // Guardo la Publicacion en el Backend
             BackendContext.Publicaciones.Add(publicacion); 
+
+            // Guardo los cambios
+            BackendContext.SaveChanges();
+        }
+        /// <summary>
+        /// AddEstadoDePostulaciones: Inserta un estado en la BD 
+        /// </summary>
+        /// <returns></returns>
+        public void AddEstadoDePostulaciones(EstadoDePostulacion estado){
+            // Guardo la Publicacion en el Backend
+            BackendContext.EstadoDePostulaciones.Add(estado); 
 
             // Guardo los cambios
             BackendContext.SaveChanges();
@@ -269,15 +281,23 @@ namespace Publicaciones.Service {
             this.AddAutor(autor3);
             this.AddAutor(autor4);
 
-
-
-
-
-
-
-
-
-
+            //EstadoDePostulacion por defecto
+            EstadoDePostulacion estado1 = new EstadoDePostulacion();
+            estado1.IdEstado="estado1";
+            estado1.Tipo="Aceptada";
+            estado1.paper=paper1;
+            EstadoDePostulacion estado2 = new EstadoDePostulacion();
+            estado2.IdEstado="estado2";
+            estado2.Tipo="Rechazado";
+            estado2.paper=paper2;
+            EstadoDePostulacion estado3 = new EstadoDePostulacion();
+            estado3.IdEstado="estado3";
+            estado3.Tipo="Aceptada";
+            estado3.paper=paper2;
+            // Agregar EstadoDePostulacion al backend
+            this.AddEstadoDePostulaciones(estado1);
+            this.AddEstadoDePostulaciones(estado2);
+            this.AddEstadoDePostulaciones(estado3);
 
             foreach (Persona p in BackendContext.Personas) {
                 Logger.LogDebug("Persona: {0}", p); 

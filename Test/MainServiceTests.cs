@@ -90,7 +90,7 @@ namespace Publicaciones.Service {
             // Debe ser !=  de null
             Assert.True(pub != null);
 
-            // Debe haber solo 4
+            // Debe haber solo 2
             Assert.True(pub.Count == 2);
 //PRUEBA ESTADOS DE PUBLICACION
             // PUBLICACIONES en la BD
@@ -100,7 +100,7 @@ namespace Publicaciones.Service {
             Assert.True(estado != null);
 
             // Debe haber solo 4
-            Assert.True(estado.Count == 0);
+            Assert.True(estado.Count == 3);
 
 
             // Print de la persona
