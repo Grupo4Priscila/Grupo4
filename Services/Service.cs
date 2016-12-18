@@ -11,29 +11,20 @@ namespace Publicaciones.Service {
     /// Metodos de la interface
     /// </summary>
     public interface IMainService {
-
         void Add(Persona persona); 
+
         List < Persona > FindPersonas(string nombre);
+
         List <Persona> Personas();
 
         void AddPublicaciones(Publicacion publicacion);
         List <Publicacion> Publicaciones(string rut);
-        List <Publicacion> Publicaciones();
-
         void AddAutor(Autor autor);
-        List<Autor> Autores(String rut);
-        List<Autor> Autores();
-
-        void AddEstadoPostulacion(EstadoDePostulacion estadoPostulacion);
-        List<EstadoDePostulacion> EstadoPostulaciones(String tipo);
-        List<EstadoDePostulacion> EstadoPostulaciones();
-
         void AddPaper(Paper paper);
-        List<Paper> Papers(String titulo);
+        List<Publicacion> Publicaciones();
+        
+         List<Autor> Autores();
         List<Paper> Papers();
-
-
-
 
         void Initialize(); 
     }
@@ -100,44 +91,13 @@ namespace Publicaciones.Service {
             BackendContext.SaveChanges();
         }
         public void AddAutor(Autor autor){
-            // Guardo el Autor en el Backend
-            BackendContext.Autores.Add(autor); 
-
-            // Guardo los cambios
-            BackendContext.SaveChanges(); 
+            BackendContext.Autores.Add(autor);
+            BackendContext.SaveChanges();
         }
         public void AddPaper(Paper paper){
-            // Guardo el paper en el Backend
-            BackendContext.Papers.Add(paper); 
-
-            // Guardo los cambios
-            BackendContext.SaveChanges(); 
+            BackendContext.Papers.Add(paper);
+            BackendContext.SaveChanges();
         }
-        public void AddEstadoPostulacion(EstadoDePostulacion estadoPostulacion){
-            // Guardo el paper en el Backend
-            BackendContext.EstadosdePostulaciones.Add(estadoPostulacion); 
-
-            // Guardo los cambios
-            BackendContext.SaveChanges(); 
-        }
-       
-        public List<Persona> Personas() {
-            return BackendContext.Personas.ToList();
-        }
-
-        public List <Publicacion> Publicaciones(){
-            return BackendContext.Publicaciones.ToList();
-        }
-        public List<Autor> Autores(){
-            return BackendContext.Autores.ToList();
-        }
-        public List<Paper> Papers(){
-            return BackendContext.Papers.ToList(); 
-        }
-        public List<EstadoDePostulacion> EstadoPostulaciones(){
-            return BackendContext.EstadosdePostulaciones.ToList();
-        }
-
 
         public List < Persona > FindPersonas(string nombre) {
             return BackendContext.Personas
@@ -145,22 +105,39 @@ namespace Publicaciones.Service {
                 .OrderBy(p => p.Nombre)
                 .ToList(); 
         }
-         public List<Publicacion> Publicaciones(string rut){
-             return null;
-         //    return BackendContext.Publicacion
-         //    Where()
-         }
-         public List<Autor> Autores(string rut){
-             return null;
-         }
-         public List<Paper> Papers(String titulo){
-             return null;
-         }
-        public List<EstadoDePostulacion> EstadoPostulaciones(String tipo){
-            return null;
+
+        public List<Persona> Personas() {
+            return BackendContext.Personas.ToList();
+        }
+        public List<Publicacion> Publicaciones()
+        {
+            return BackendContext.Publicaciones.ToList();
+        }
+        public List<Autor> Autores()
+        {
+            return BackendContext.Autores.ToList();
+        }
+        public List<Paper> Papers()
+        {
+            return BackendContext.Papers.ToList();
         }
 
-
+         public List<Publicacion> Publicaciones(string rut){
+          //   Lista de el autor participante en distintas Publicaciones
+          List<Autor> autores =
+          BackendContext.Autores
+          .Where(a =>a.Id.Equals(rut))
+          .ToList();
+          ///lista donde estaran las publicaciones escritas por dicho Autor
+          List <Publicacion> publicacionesPorAutor= new List<Publicacion>();
+          foreach(Autor autor in autores)
+          {
+              /// el autor que escribio el paper y luego fue una publicacion
+              publicacionesPorAutor.Add(autor.paper.Publicacion);
+          }
+          //Retorna la lista con las publicaciones si existen
+             return publicacionesPorAutor;
+         }
 
         public void Initialize() {
 
@@ -169,6 +146,7 @@ namespace Publicaciones.Service {
             }
 
             Logger.LogDebug("Realizando Inicializacion .."); 
+
             // Persona por defecto
             Persona persona = new Persona(); 
             persona.Nombre = "Diego"; 

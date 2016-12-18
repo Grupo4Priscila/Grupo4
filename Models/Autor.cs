@@ -1,15 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Publicaciones.Models{
-    ///<summary>
-    ///Clase Autor
-    ///Atributos
-        ///Fecha: Fecha en el momento que se instancia
-    ///<summary>
-    ///<returns></returns>
+
     public class Autor{
 
-        public string Fecha{set;get;}
+[Key]
+        public string Id{set;get;}
         public Persona Persona{set;get;}
+        public Paper paper{set;get;}
 
+        public string Fecha{set;get;}
         
     }
 }

@@ -1,8 +1,7 @@
-using Microsoft.EntityFrameworkCore;
-using Publicaciones.Models;
+using Microsoft.EntityFrameworkCore; 
+using Publicaciones.Models; 
 
-namespace Publicaciones.Backend
-{
+namespace Publicaciones.Backend {
 
     /// <summary>
     /// Representacion de la base de datos.
@@ -27,41 +26,10 @@ namespace Publicaciones.Backend
         /// </summary>
         /// <returns>Link a la BD de Personas</returns>
         public DbSet < Persona > Personas {get; set; }
-       
-        /// <summary>
-        /// Representacion de las Publicaciones del Backend
-        /// </summary>
-        /// <returns>Link a la BD de Publicaciones</returns>
+        public DbSet<Autor> Autores{get;set;}
         public DbSet <Publicacion> Publicaciones{get;set;}
-       
-        /// <summary>
-        /// Representacion del Paper del Backend
-        /// </summary>
-        /// <returns>Link a la BD de Papers</returns>
         public DbSet <Paper> Papers{get;set;}
-       
-        /// <summary>
-        /// Representacion del Estado de la publicacion del Backend
-        /// </summary>
-        /// <returns>Link a la BD de EstadosdePostulaciones</returns>
-        public DbSet <EstadoDePostulacion> EstadosdePostulaciones{get;set;}
-       
-        /// <summary>
-        /// Representacion del Autor del Backend
-        /// </summary>
-        /// <returns>Link a la BD de Autores</returns>
-        public DbSet <Autor> Autores{get;set;}
-                /// <summary>
-        /// Representacion del Autor del Backend
-        /// </summary>
-        /// <returns>Link a la BD de Autores</returns>
-        public DbSet <Revista> Revistas{get;set;}
 
-
-//        protected override void onModelCreating(ModelBuilder modelBuilder){
-  //          modelBuilder.Entity<Autor>().HasKey(s=> new {s.Rut, s.Doi});
-    //        base.OnModelCreating(modelBuilder);
-  //      }
     }
 
 }
