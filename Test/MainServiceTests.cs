@@ -46,6 +46,7 @@ namespace Publicaciones.Service {
             Logger.LogInformation("Initialize Test ok.");
         }
 
+
         [Fact]
         public void InitializeTest()
         {
@@ -109,6 +110,17 @@ namespace Publicaciones.Service {
             }
 
             Logger.LogInformation("Test IMainService.Initialize() ok");
+        }
+        
+        [Fact]
+        public void pruebaPublicaciones(){
+
+        Logger.LogInformation("Testing ImainService.pruebaPublicaciones().......");
+        Service.Initialize();
+
+        //La persona 1 de nombre Diego, con rut a que escribio 1 publicacion
+        string rut= Service.FindPersonas("Diego").First().Rut;
+
         }
 
         void IDisposable.Dispose()

@@ -205,7 +205,6 @@ namespace Publicaciones.Service {
          }
 
 
-
         public void Initialize() {
 
             if (Initialized) {
