@@ -206,43 +206,62 @@ namespace Publicaciones.Service {
             Persona persona1 = new Persona(); 
             persona1.Nombre = "Diego"; 
             persona1.Apellido = "Urrutia"; 
+            persona1.Rut="a";
 
             Persona persona2 = new Persona(); 
             persona2.Nombre = "Priscila"; 
-            persona2.Apellido = "Gonzalez"; 
+            persona2.Apellido = "Gonzalez";
+            persona2.Rut="b"; 
 
             Persona persona3 = new Persona(); 
             persona3.Nombre = "Pepe"; 
-            persona3.Apellido = "Lota"; 
+            persona3.Apellido = "Lota";
+            persona3.Rut="c"; 
 
             // Agrego la persona al backend
             this.Add(persona1); 
             this.Add(persona2);
             this.Add(persona3);
 
-            // Paper por defecto
-            
-            Paper paper1 = new Paper();
-            Paper paper2 = new Paper();
-
-
-            // Agrego los Autores al backend
-            this.AddPaper(paper1); 
-            this.AddPaper(paper2);
-
             //Publicacion por defecto
             Publicacion publi1=new Publicacion();
+            publi1.Doi="a1";
+            publi1.Titulo="p1";
             Publicacion publi2=new Publicacion(); 
+            publi2.Doi="a2";
+            publi1.Titulo="p2";
             //Agrego las publicaciones al backend
             this.AddPublicaciones(publi1);
             this.AddPublicaciones(publi2);
 
 
+            // Paper por defecto
+            Paper paper1 = new Paper();
+            paper1.id="p1";
+            paper1.Titulo="p1";
+            paper1.Publicacion=publi1;
+            Paper paper2 = new Paper();
+            paper2.id="p2";
+            paper2.Titulo="p2";
+            paper2.Publicacion=publi2;
+
+            // Agrego los paper al backend
+            this.AddPaper(paper1); 
+            this.AddPaper(paper2);
+        
             // Autores por defecto
             Autor autor1 = new Autor();
+            autor1.Persona=persona1;
+            autor1.paper=paper1;
             Autor autor2 = new Autor();
+            autor2.Persona=persona2;
+            autor2.paper=paper1;
             Autor autor3 = new Autor();
+            autor3.Persona=persona2;
+            autor3.paper=paper2;
             Autor autor4 = new Autor();
+            autor4.Persona=persona3;
+            autor4.paper=paper2;
 
             // Agrego los Autores al backend
             this.AddAutor(autor1); 
