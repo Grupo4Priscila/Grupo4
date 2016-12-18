@@ -42,7 +42,6 @@ namespace Publicaciones.Service {
             // Servicio a probar
             Service = new MainService(backend, loggerFactory);
 
-
             Logger.LogInformation("Initialize Test ok.");
         }
 
@@ -61,8 +60,8 @@ namespace Publicaciones.Service {
             // Debe ser !=  de null
             Assert.True(personas != null);
 
-            // Debe haber solo 1
-            Assert.True(personas.Count == 1);
+            // Debe haber 5 persona
+            Assert.True(personas.Count == 5);
 
             // Print de la persona
             foreach(Persona persona in personas) {

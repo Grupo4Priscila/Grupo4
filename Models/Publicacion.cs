@@ -16,11 +16,11 @@ namespace Publicaciones.Models
     {
         public string Doi { get; set; }
         public string Titulo { get; set; }
-        public string Volumen { get; set; }
-        public string PaginaInicio  { get; set; }
-        public string PaginaFinal { get; set; }
-        public string ContidadRechazos { get; set; }
-        public string NumeroDePagina{get; set;}
+        public int Volumen { get; set; }
+ //       public string PaginaInicio  { get; set; }
+//        public string PaginaFinal { get; set; }
+        public int ContidadRechazos { get; set; }
+        public int NumeroDePagina{get; set;}
     }
 
 }

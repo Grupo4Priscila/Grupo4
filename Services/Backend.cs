@@ -1,7 +1,8 @@
-using Microsoft.EntityFrameworkCore; 
-using Publicaciones.Models; 
+using Microsoft.EntityFrameworkCore;
+using Publicaciones.Models;
 
-namespace Publicaciones.Backend {
+namespace Publicaciones.Backend
+{
 
     /// <summary>
     /// Representacion de la base de datos.
@@ -50,6 +51,17 @@ namespace Publicaciones.Backend {
         /// </summary>
         /// <returns>Link a la BD de Autores</returns>
         public DbSet <Autor> Autores{get;set;}
+                /// <summary>
+        /// Representacion del Autor del Backend
+        /// </summary>
+        /// <returns>Link a la BD de Autores</returns>
+        public DbSet <Revista> Revistas{get;set;}
+
+
+//        protected override void onModelCreating(ModelBuilder modelBuilder){
+  //          modelBuilder.Entity<Autor>().HasKey(s=> new {s.Rut, s.Doi});
+    //        base.OnModelCreating(modelBuilder);
+  //      }
     }
 
 }
