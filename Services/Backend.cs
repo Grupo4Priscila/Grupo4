@@ -29,6 +29,7 @@ namespace Publicaciones.Backend {
         public DbSet<Autor> Autores{get;set;}
         public DbSet <Publicacion> Publicaciones{get;set;}
         public DbSet <Paper> Papers{get;set;}
+        public DbSet <EstadoDePostulacion> EstadoDePostulaciones{get;set;}
 
     }
 

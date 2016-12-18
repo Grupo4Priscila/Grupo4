@@ -28,7 +28,7 @@ namespace Publicaciones.Models{
  //       public Autor autorPrincipal{set;get;}
 //        public List<Autor> listaAutor;
  ///       public int cantidadRechazos{set;get;}
-        public List<EstadoDePostulacion> EstadoDePostulacion;
+
 
 
 

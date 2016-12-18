@@ -55,14 +55,53 @@ namespace Publicaciones.Service {
             // No se puede inicializar 2 veces
             Assert.Throws<Exception>( () => { Service.Initialize(); });
 
+//PRUEBA PERSONA
             // Personas en la BD
             List<Persona> personas = Service.Personas();
 
             // Debe ser !=  de null
             Assert.True(personas != null);
 
-            // Debe haber solo 1
-            Assert.True(personas.Count == 1);
+            // Debe haber solo 3
+            Assert.True(personas.Count == 3);
+//PRUEBA AUTOR
+            // Autor en la BD
+            List<Autor> autor = Service.Autores();
+
+            // Debe ser !=  de null
+            Assert.True(autor != null);
+
+            // Debe haber solo 4
+            Assert.True(autor.Count == 4);
+
+//PRUEBA PAPER
+            // PAPER en la BD
+            List<Paper> paper = Service.Papers();
+
+            // Debe ser !=  de null
+            Assert.True(paper != null);
+
+            // Debe haber solo 4
+            Assert.True(paper.Count == 2);
+//PRUEBA PUBLICACIONES
+            // PUBLICACIONES en la BD
+            List<Publicacion> pub = Service.Publicaciones();
+
+            // Debe ser !=  de null
+            Assert.True(pub != null);
+
+            // Debe haber solo 4
+            Assert.True(pub.Count == 2);
+//PRUEBA ESTADOS DE PUBLICACION
+            // PUBLICACIONES en la BD
+            List<EstadoDePostulacion> estado = Service.EstadoDePostulaciones();
+
+            // Debe ser !=  de null
+            Assert.True(estado != null);
+
+            // Debe haber solo 4
+            Assert.True(estado.Count == 0);
+
 
             // Print de la persona
             foreach(Persona persona in personas) {
