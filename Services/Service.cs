@@ -1,11 +1,12 @@
-using System; 
-using System.Collections.Generic; 
-using System.Linq; 
-using Microsoft.Extensions.Logging; 
-using Publicaciones.Backend; 
-using Publicaciones.Models; 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Extensions.Logging;
+using Publicaciones.Backend;
+using Publicaciones.Models;
 
-namespace Publicaciones.Service {
+namespace Publicaciones.Service
+{
 
     /// <summary>
     /// Metodos de la interface
@@ -23,6 +24,7 @@ namespace Publicaciones.Service {
         List<Paper> Papers();
         void AddEstadoDePostulaciones(EstadoDePostulacion estado);
         List<EstadoDePostulacion> EstadoDePostulaciones();
+
 
         void Initialize(); 
     }
@@ -134,6 +136,7 @@ namespace Publicaciones.Service {
                 .OrderBy(p => p.Nombre)
                 .ToList(); 
         }
+
         /// <summary>
         /// Obtiene una lista de todas personas en la BD
         /// </summary>
@@ -179,7 +182,8 @@ namespace Publicaciones.Service {
         /// Obtiene una lista de todas las publicaciones asociadas a un rut
         /// </summary>
         /// <returns></returns>
-         public List<Publicacion> Publicaciones(string rut){   
+         public List<Publicacion> Publicaciones(string rut){
+
          //Lista de todos los estados de postulaciones
          List<EstadoDePostulacion> listaEstadoPost= EstadoDePostulaciones();
           //   Lista de el autor participante en distintas Publicaciones
@@ -187,17 +191,27 @@ namespace Publicaciones.Service {
           BackendContext.Autores
           .Where(a =>a.Id.Equals(rut))
           .ToList();
+
           ///lista donde estaran las publicaciones escritas por dicho Autor
           List <Publicacion> publicacionesPorAutor= new List<Publicacion>();
+
+
           //Para cada autor donde el estado de su paper sea Aceptada (para que exista la publicacion)
           foreach(Autor autor in autores)
-          {   
-              foreach(EstadoDePostulacion estado in listaEstadoPost){
-                  if(autor.paper.id==estado.paper.id && estado.Tipo=="Aceptada"){
+          {  
+            Publicacion  publicacion = 
+            BackendContext.Publicaciones
+            .Where(p=> p.Doi.Equals(autor.paper.Publicacion.Doi))
+            .SingleOrDefault();
+              
+            
+       //       foreach(EstadoDePostulacion estado in listaEstadoPost){
+
+         //         if(autor.paper==estado.paper && estado.Tipo==1){
                 /// La publicacion, que primero fue un paper Aceptada escrita por el autor
-                    publicacionesPorAutor.Add(autor.paper.Publicacion);
-                      }
-                  }
+                    publicacionesPorAutor.Add(publicacion);
+            //          }
+              //    }
               }
               
           //Retorna la lista con las publicaciones (si existen) si no, retorna una lista vacia
@@ -283,15 +297,15 @@ namespace Publicaciones.Service {
             //EstadoDePostulacion por defecto
             EstadoDePostulacion estado1 = new EstadoDePostulacion();
             estado1.IdEstado="estado1";
-            estado1.Tipo="Aceptada";
+            estado1.Tipo=1;
             estado1.paper=paper1;
             EstadoDePostulacion estado2 = new EstadoDePostulacion();
             estado2.IdEstado="estado2";
-            estado2.Tipo="Rechazado";
+            estado2.Tipo=2;
             estado2.paper=paper2;
             EstadoDePostulacion estado3 = new EstadoDePostulacion();
             estado3.IdEstado="estado3";
-            estado3.Tipo="Aceptada";
+            estado3.Tipo=1;
             estado3.paper=paper2;
             // Agregar EstadoDePostulacion al backend
             this.AddEstadoDePostulaciones(estado1);

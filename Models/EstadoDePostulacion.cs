@@ -13,7 +13,7 @@ namespace Publicaciones.Models{
     public class EstadoDePostulacion{
         [Key]
         public string IdEstado{set;get;}
-        public string Tipo{set;get;}
+        public int Tipo{set;get;}
         public string Fecha{set;get;}
         public Paper paper{set;get;}
 

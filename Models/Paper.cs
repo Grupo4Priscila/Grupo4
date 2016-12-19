@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace Publicaciones.Models{
     
     ///<summary>
@@ -16,7 +18,7 @@ namespace Publicaciones.Models{
     ///<summary>
     ///<returns></returns>
     public class Paper{
-
+        [Key]
         public string id{set;get;}
         public string Titulo{set;get;}
         public Publicacion Publicacion{get;set;}

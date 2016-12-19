@@ -119,7 +119,67 @@ namespace Publicaciones.Service {
         Service.Initialize();
 
         //La persona 1 de nombre Diego, con rut a que escribio 1 publicacion
-        string rut= Service.FindPersonas("Diego").First().Rut;
+        string rut1= Service.FindPersonas("Diego").First().Rut;
+        // es el rut de Diego
+        Assert.True(rut1=="a");
+        List<Publicacion> lp1= Service.Publicaciones(rut1);
+        // se crea una lista
+        Assert.True(lp1!=null);
+        //la lista contiene 1 publicacion
+        Assert.True(lp1.Count==0);
+
+         // Print de la Publicacion
+            foreach(Publicacion p in lp1) {
+                Logger.LogInformation("Publicacion: {0}", p.Doi);
+            }
+
+
+
+        //La persona 2 de nombre Priscila, con rut b que escribio 2 publicacion
+        string rut2= Service.FindPersonas("Priscila").First().Rut;
+        // es el rut de Priscila
+        Assert.True(rut2=="b");
+        List<Publicacion> lp2= Service.Publicaciones(rut2);
+        // se crea una lista
+        Assert.True(lp2!=null);
+        //la lista contiene 2 publicacion
+        Assert.True(lp2.Count==0);
+         // Print de la Publicacion
+            foreach(Publicacion p in lp2) {
+                Logger.LogInformation("Publicacion: {0}", p.Doi);
+            }
+
+
+
+        //La persona 3 de nombre Pepe, con rut a que escribio 1 publicacion
+        string rut3= Service.FindPersonas("Pepe").First().Rut;
+        // es el rut de Pepe
+        Assert.True(rut3=="c");
+        List<Publicacion> lp3= Service.Publicaciones(rut3);
+        // se crea una lista
+        Assert.True(lp3!=null);
+        //la lista contiene 1 publicacion
+        Assert.True(lp3.Count==0);
+
+         // Print de la Publicacion
+            foreach(Publicacion p in lp3) {
+                Logger.LogInformation("Publicacion: {0}", p.Doi);
+            }
+
+        //rut no existente
+        List<Publicacion> lp4= Service.Publicaciones("d");
+        // Se crea una lista vacia
+        Assert.True(lp4!=null);
+        //la lista no contiene publicacion
+        Assert.True(lp4.Count==0);
+        
+        // Print de la Publicacion
+            foreach(Publicacion p in lp4) {
+                Logger.LogInformation("Publicacion: {0}", p.Doi);
+            }
+
+
+        Logger.LogInformation("Test IMainService.pruebaPublicaciones() ok");
 
         }
 
