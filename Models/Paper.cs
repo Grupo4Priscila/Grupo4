@@ -29,7 +29,7 @@ namespace Publicaciones.Models{
  //       public Autor autorCorrespondiente{set;get;}
  //       public Autor autorPrincipal{set;get;}
 //        public List<Autor> listaAutor;
- ///       public int cantidadRechazos{set;get;}
+ ///      public int cantidadRechazos{set;get;}
 
 
 

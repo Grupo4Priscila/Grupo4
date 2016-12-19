@@ -65,6 +65,10 @@ namespace Publicaciones.Service {
 
             // Debe haber solo 3
             Assert.True(personas.Count == 3);
+            // Print de la persona
+            foreach(Persona persona in personas) {
+                Logger.LogInformation("Persona: {0}", persona.Nombre);
+            }
 //PRUEBA AUTOR
             // Autor en la BD
             List<Autor> autor = Service.Autores();
@@ -74,6 +78,32 @@ namespace Publicaciones.Service {
 
             // Debe haber solo 4
             Assert.True(autor.Count == 4);
+            // Print de la Autores
+            foreach(Autor au in autor) {
+                Logger.LogInformation("Autor: {0}", au.Persona.Nombre);
+            }
+
+            //rut Priscila 2 autor
+            List<Autor> a=Service.autores("456");
+            // Debe ser !=  de null
+            Assert.True(a != null);
+            // Debe haber solo 2
+            Assert.True(a.Count == 2);
+            
+
+            //rut Urrutia 1 autor
+            List<Autor> a2=Service.autores("123");
+            // Debe ser !=  de null
+            Assert.True(a2 != null);
+            // Debe haber solo 1
+            Assert.True(a2.Count == 1);
+
+            //rut Urrutia 1 autor
+            List<Autor> a3=Service.autores("789");
+            // Debe ser !=  de null
+            Assert.True(a3 != null);
+            // Debe haber solo 1
+            Assert.True(a3.Count == 1);
 
 //PRUEBA PAPER
             // PAPER en la BD
@@ -82,8 +112,15 @@ namespace Publicaciones.Service {
             // Debe ser !=  de null
             Assert.True(paper != null);
 
-            // Debe haber solo 4
+            // Debe haber solo 2
             Assert.True(paper.Count == 2);
+
+            // Print del Paper
+            foreach(Paper p in paper) {
+                Logger.LogInformation("Paper: {0}", p.Titulo);
+            }
+
+
 //PRUEBA PUBLICACIONES
             // PUBLICACIONES en la BD
             List<Publicacion> pub = Service.Publicaciones();
@@ -93,6 +130,11 @@ namespace Publicaciones.Service {
 
             // Debe haber solo 2
             Assert.True(pub.Count == 2);
+
+            // Print del Paper
+            foreach(Publicacion pu in pub) {
+                Logger.LogInformation("Publicacion: {0}", pu.Doi);
+            }
 //PRUEBA ESTADOS DE PUBLICACION
             // PUBLICACIONES en la BD
             List<EstadoDePostulacion> estado = Service.EstadoDePostulaciones();
@@ -104,9 +146,9 @@ namespace Publicaciones.Service {
             Assert.True(estado.Count == 3);
 
 
-            // Print de la persona
-            foreach(Persona persona in personas) {
-                Logger.LogInformation("Persona: {0}", persona);
+            // Print de los estados
+            foreach(EstadoDePostulacion es in estado) {
+                Logger.LogInformation("EstadoDePostulacion: {0}", es);
             }
 
             Logger.LogInformation("Test IMainService.Initialize() ok");
@@ -121,16 +163,16 @@ namespace Publicaciones.Service {
         //La persona 1 de nombre Diego, con rut a que escribio 1 publicacion
         string rut1= Service.FindPersonas("Diego").First().Rut;
         // es el rut de Diego
-        Assert.True(rut1=="a");
+        Assert.True(rut1=="123");
         List<Publicacion> lp1= Service.Publicaciones(rut1);
         // se crea una lista
         Assert.True(lp1!=null);
         //la lista contiene 1 publicacion
-        Assert.True(lp1.Count==0);
+        Assert.True(lp1.Count==1);
 
          // Print de la Publicacion
-            foreach(Publicacion p in lp1) {
-                Logger.LogInformation("Publicacion: {0}", p.Doi);
+            foreach(Publicacion p1 in lp1) {
+                Logger.LogInformation("Publicaciones del autor Diego: {0}", p1.Doi);
             }
 
 
@@ -138,15 +180,15 @@ namespace Publicaciones.Service {
         //La persona 2 de nombre Priscila, con rut b que escribio 2 publicacion
         string rut2= Service.FindPersonas("Priscila").First().Rut;
         // es el rut de Priscila
-        Assert.True(rut2=="b");
+        Assert.True(rut2=="456");
         List<Publicacion> lp2= Service.Publicaciones(rut2);
         // se crea una lista
         Assert.True(lp2!=null);
         //la lista contiene 2 publicacion
-        Assert.True(lp2.Count==0);
+        Assert.True(lp2.Count==2);
          // Print de la Publicacion
-            foreach(Publicacion p in lp2) {
-                Logger.LogInformation("Publicacion: {0}", p.Doi);
+            foreach(Publicacion p2 in lp2) {
+                Logger.LogInformation("Publicaciones del autor Priscila: {0}", p2.Doi);
             }
 
 
@@ -154,16 +196,16 @@ namespace Publicaciones.Service {
         //La persona 3 de nombre Pepe, con rut a que escribio 1 publicacion
         string rut3= Service.FindPersonas("Pepe").First().Rut;
         // es el rut de Pepe
-        Assert.True(rut3=="c");
+        Assert.True(rut3=="789");
         List<Publicacion> lp3= Service.Publicaciones(rut3);
         // se crea una lista
         Assert.True(lp3!=null);
         //la lista contiene 1 publicacion
-        Assert.True(lp3.Count==0);
+        Assert.True(lp3.Count==1);
 
          // Print de la Publicacion
-            foreach(Publicacion p in lp3) {
-                Logger.LogInformation("Publicacion: {0}", p.Doi);
+            foreach(Publicacion p3 in lp3) {
+                Logger.LogInformation("Publicacion del autor Pepe: {0}", p3.Doi);
             }
 
         //rut no existente
@@ -174,10 +216,9 @@ namespace Publicaciones.Service {
         Assert.True(lp4.Count==0);
         
         // Print de la Publicacion
-            foreach(Publicacion p in lp4) {
-                Logger.LogInformation("Publicacion: {0}", p.Doi);
+            foreach(Publicacion p4 in lp4) {
+                Logger.LogInformation("Publicacion, No imprime porque el rut no existe: {0}", p4.Doi);
             }
-
 
         Logger.LogInformation("Test IMainService.pruebaPublicaciones() ok");
 

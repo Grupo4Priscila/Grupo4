@@ -15,6 +15,7 @@ namespace Publicaciones.Service
         void Add(Persona persona); 
         List < Persona > FindPersonas(string nombre);
         List <Persona> Personas();
+        List <Autor> autores(string rut);
         void AddPublicaciones(Publicacion publicacion);
         List <Publicacion> Publicaciones(string rut);
         void AddAutor(Autor autor);
@@ -136,6 +137,11 @@ namespace Publicaciones.Service
                 .OrderBy(p => p.Nombre)
                 .ToList(); 
         }
+        public List <Autor> autores(string rut){
+        return BackendContext.Autores
+          .Where(a =>a.Persona.Rut.Equals(rut))
+          .ToList();
+        }
 
         /// <summary>
         /// Obtiene una lista de todas personas en la BD
@@ -189,29 +195,28 @@ namespace Publicaciones.Service
           //   Lista de el autor participante en distintas Publicaciones
           List<Autor> autores =
           BackendContext.Autores
-          .Where(a =>a.Id.Equals(rut))
+          .Where(a =>a.Persona.Rut.Equals(rut))
           .ToList();
 
           ///lista donde estaran las publicaciones escritas por dicho Autor
           List <Publicacion> publicacionesPorAutor= new List<Publicacion>();
-
 
           //Para cada autor donde el estado de su paper sea Aceptada (para que exista la publicacion)
           foreach(Autor autor in autores)
           {  
             Publicacion  publicacion = 
             BackendContext.Publicaciones
-            .Where(p=> p.Equals(autor.paper.Publicacion))
+            .Where(p=> p.Doi.Equals(autor.paper.Publicacion.Doi))
             .SingleOrDefault();
               
             
-       //       foreach(EstadoDePostulacion estado in listaEstadoPost){
+              foreach(EstadoDePostulacion estado in listaEstadoPost){
 
-         //         if(autor.paper==estado.paper && estado.Tipo==1){
-                /// La publicacion, que primero fue un paper Aceptada escrita por el autor
+                  if(autor.paper==estado.paper && estado.Tipo=="Aceptada"){
+                // La publicacion, que primero fue un paper Aceptada escrita por el autor
                     publicacionesPorAutor.Add(publicacion);
-            //          }
-              //    }
+                      }
+                  }
               }
               
           //Retorna la lista con las publicaciones (si existen) si no, retorna una lista vacia
@@ -231,17 +236,17 @@ namespace Publicaciones.Service
             Persona persona1 = new Persona(); 
             persona1.Nombre = "Diego"; 
             persona1.Apellido = "Urrutia"; 
-            persona1.Rut="a";
+            persona1.Rut="123";
 
             Persona persona2 = new Persona(); 
             persona2.Nombre = "Priscila"; 
             persona2.Apellido = "Gonzalez";
-            persona2.Rut="b"; 
+            persona2.Rut="456"; 
 
             Persona persona3 = new Persona(); 
             persona3.Nombre = "Pepe"; 
             persona3.Apellido = "Lota";
-            persona3.Rut="c"; 
+            persona3.Rut="789"; 
 
             // Agrego la persona al backend
             this.Add(persona1); 
@@ -276,15 +281,19 @@ namespace Publicaciones.Service
         
             // Autores por defecto
             Autor autor1 = new Autor();
+            autor1.Id=persona1.Rut;
             autor1.Persona=persona1;
             autor1.paper=paper1;
             Autor autor2 = new Autor();
             autor2.Persona=persona2;
             autor2.paper=paper1;
+            autor2.Fecha="13/";
             Autor autor3 = new Autor();
             autor3.Persona=persona2;
             autor3.paper=paper2;
+            autor3.Fecha="12/12/12";
             Autor autor4 = new Autor();
+            autor4.Id=persona3.Rut;
             autor4.Persona=persona3;
             autor4.paper=paper2;
 
@@ -297,15 +306,15 @@ namespace Publicaciones.Service
             //EstadoDePostulacion por defecto
             EstadoDePostulacion estado1 = new EstadoDePostulacion();
             estado1.IdEstado="estado1";
-            estado1.Tipo=1;
+            estado1.Tipo="Aceptada";
             estado1.paper=paper1;
             EstadoDePostulacion estado2 = new EstadoDePostulacion();
             estado2.IdEstado="estado2";
-            estado2.Tipo=2;
+            estado2.Tipo="Rechazada";
             estado2.paper=paper2;
             EstadoDePostulacion estado3 = new EstadoDePostulacion();
             estado3.IdEstado="estado3";
-            estado3.Tipo=1;
+            estado3.Tipo="Aceptada";
             estado3.paper=paper2;
             // Agregar EstadoDePostulacion al backend
             this.AddEstadoDePostulaciones(estado1);
