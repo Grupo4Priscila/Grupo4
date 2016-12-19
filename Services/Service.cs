@@ -201,7 +201,7 @@ namespace Publicaciones.Service
           {  
             Publicacion  publicacion = 
             BackendContext.Publicaciones
-            .Where(p=> p.Doi.Equals(autor.paper.Publicacion.Doi))
+            .Where(p=> p.Equals(autor.paper.Publicacion))
             .SingleOrDefault();
               
             
